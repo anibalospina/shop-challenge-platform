@@ -6,7 +6,7 @@ import { FormPaymentComponent } from './form-payment/form-payment.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TuiFieldErrorPipeModule, TuiInputModule } from '@taiga-ui/kit';
 import { TuiFilterByInputPipeModule } from '@taiga-ui/kit';
-import { TuiErrorModule } from '@taiga-ui/core';
+import { TuiErrorModule, TuiLoaderModule } from '@taiga-ui/core';
 import { TuiInputPhoneInternationalModule } from '@taiga-ui/kit';
 import { TuiLabelModule } from '@taiga-ui/core';
 import { TuiIslandModule } from '@taiga-ui/kit';
@@ -30,9 +30,9 @@ import { TuiInputNumberModule } from '@taiga-ui/kit';
     TuiLabelModule,
     TuiIslandModule,
     TuiButtonModule,
-    TuiInputInlineModule,
     TuiCurrencyPipeModule,
     TuiInputNumberModule,
+    TuiLoaderModule,
   ],
 })
 export class PaymentModule {}

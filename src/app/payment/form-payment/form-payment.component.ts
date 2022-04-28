@@ -1,8 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { TUI_VALIDATION_ERRORS } from '@taiga-ui/kit';
 import { TuiCountryIsoCode } from '@taiga-ui/i18n';
-import { TUI_NUMBER_FORMAT } from '@taiga-ui/core';
+import {
+  TuiNotification,
+  TuiNotificationsService,
+  TUI_NUMBER_FORMAT,
+} from '@taiga-ui/core';
+import { PaymentService } from '../payment.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { PaymentRequest } from '../models/payment-request';
 
 @Component({
   selector: 'app-form-payment',
@@ -23,6 +30,7 @@ import { TUI_NUMBER_FORMAT } from '@taiga-ui/core';
   ],
 })
 export class FormPaymentComponent implements OnInit {
+  public showLoader: boolean = false;
   readonly countries = Object.values(TuiCountryIsoCode);
   countryIsoCode = TuiCountryIsoCode.CO;
 
@@ -37,7 +45,12 @@ export class FormPaymentComponent implements OnInit {
     total: ['100', [Validators.required]],
   });
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private paymentService: PaymentService,
+    @Inject(TuiNotificationsService)
+    private readonly notificationsService: TuiNotificationsService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -59,5 +72,45 @@ export class FormPaymentComponent implements OnInit {
 
   get total() {
     return this.payForm.get('total') as FormControl;
+  }
+
+  createRequest() {
+    this.showLoader = true;
+
+    this.paymentService
+      .createRequest(
+        this.customerName.value,
+        this.customerEmail.value,
+        this.customerMobile.value,
+        this.description.value,
+        this.total.value,
+        'USD'
+      )
+      .subscribe({
+        next: (paymentRequest: PaymentRequest) => {
+          this.showLoader = false;
+
+          this.notificationsService
+            .show('Redireccionando para realizar el pago ...')
+            .subscribe();
+
+          if (paymentRequest && paymentRequest?.processUrl) {
+            window.location.href = paymentRequest?.processUrl;
+          } else {
+            this.notificationsService
+              .show(
+                'No se pudo redireccionar a la pagina de pago, intente nuevamente',
+                {
+                  status: TuiNotification.Error,
+                }
+              )
+              .subscribe();
+          }
+        },
+        error: (error: HttpErrorResponse) => {
+          this.showLoader = false;
+          console.log(error);
+        },
+      });
   }
 }

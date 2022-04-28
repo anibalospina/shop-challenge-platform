@@ -10,7 +10,9 @@ form {
   margin-top: 50px;
 }
 
-form > tui-island > div {
+tui-input,
+tui-input-phone-international,
+tui-input-number {
   margin-top: 20px;
 }
 
