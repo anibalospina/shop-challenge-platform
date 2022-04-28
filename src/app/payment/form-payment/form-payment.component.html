@@ -1,0 +1,57 @@
+<form [formGroup]="payForm" class="tui-island__paragraph">
+  <tui-island>
+    <div class="tui-text_h3 form-title">
+      {{ description.value }}
+    </div>
+    <div>
+      <tui-input
+        tuiTextfieldExampleText="Nombre del cliente"
+        formControlName="customerName"
+        tuiHintContent="Nombre del cliente"
+      >
+        Nombre
+        <span class="tui-required"></span>
+      </tui-input>
+      <tui-error
+        formControlName="customerName"
+        [error]="[] | tuiFieldError | async"
+      ></tui-error>
+    </div>
+    <div>
+      <tui-input formControlName="customerEmail">
+        Correo electrónico
+        <input tuiTextfield type="email" />
+      </tui-input>
+      <tui-error
+        formControlName="customerEmail"
+        [error]="[] | tuiFieldError | async"
+      ></tui-error>
+    </div>
+    <div>
+      <tui-input-phone-international
+        formControlName="customerMobile"
+        class="input"
+        [countries]="countries"
+        [(countryIsoCode)]="countryIsoCode"
+      >
+        Celular
+      </tui-input-phone-international>
+      <tui-error
+        formControlName="customerMobile"
+        [error]="[] | tuiFieldError | async"
+      ></tui-error>
+    </div>
+    <div>
+      <tui-input-number formControlName="total" prefix="$">
+        Precio
+      </tui-input-number>
+      <tui-error
+        formControlName="total"
+        [error]="[] | tuiFieldError | async"
+      ></tui-error>
+    </div>
+    <div class="tui-island__paragraph tui-island__paragraph_button">
+      <button tuiButton type="button" appearance="secondary">Comprar</button>
+    </div>
+  </tui-island>
+</form>
