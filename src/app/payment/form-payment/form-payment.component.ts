@@ -99,7 +99,7 @@ export class FormPaymentComponent implements OnInit {
           } else {
             this.notificationsService
               .show(
-                'No se pudo redireccionar a la pagina de pago, intente nuevamente',
+                'No se pudo redireccionar a la pagina de pago, intente nuevamente.',
                 {
                   status: TuiNotification.Error,
                 }
@@ -109,7 +109,24 @@ export class FormPaymentComponent implements OnInit {
         },
         error: (error: HttpErrorResponse) => {
           this.showLoader = false;
-          console.log(error);
+
+          if (error.status === 422) {
+            Object.keys(error.error.errors)
+              .map((key: string) => error.error.errors[key])
+              .forEach((errors: string[]) => {
+                errors.forEach((error: string) => {
+                  this.notificationsService
+                    .show(error, { status: TuiNotification.Error })
+                    .subscribe();
+                });
+              });
+          } else {
+            this.notificationsService
+              .show('Hubo un error al realizar el pago, intente nuevamente.', {
+                status: TuiNotification.Error,
+              })
+              .subscribe();
+          }
         },
       });
   }
