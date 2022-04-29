@@ -1,0 +1,63 @@
+<tui-island>
+  <tui-notification status="warning" *ngIf="orderRequest?.status === 'CREATED'">
+    El pago se encuentra pendiente. Puede reintentar el pago. <br>
+    Verificando nuevamente el estado del pago en {{secondsToNextPayment}} segundos ...
+  </tui-notification>
+  <tui-notification status="success" *ngIf="orderRequest?.status === 'PAYED'">
+    El pago fue realizado correctamente.
+  </tui-notification>
+  <tui-notification status="error" *ngIf="orderRequest?.status === 'REJECTED'">
+    El pago no fue realizado con exito.
+  </tui-notification>
+  <div class="tui-text_h3 form-title" [class.tui-skeleton]="showLoader">
+    {{ orderRequest?.description }}
+  </div>
+  <div>
+    <label tuiLabel label="Nombre">
+      <div
+        class="tui-text_body-l-2 label-payment"
+        [class.tui-skeleton]="showLoader"
+      >
+        {{ orderRequest?.customerName }}
+      </div>
+    </label>
+  </div>
+  <div>
+    <label tuiLabel label="Correo electrónico">
+      <div
+        class="tui-text_body-l-2 label-payment"
+        [class.tui-skeleton]="showLoader"
+      >
+        {{ orderRequest?.customerEmail }}
+      </div>
+    </label>
+  </div>
+  <div>
+    <label tuiLabel label="Celular">
+      <div
+        class="tui-text_body-l-2 label-payment"
+        [class.tui-skeleton]="showLoader"
+      >
+        {{ orderRequest?.customerMobile }}
+      </div>
+    </label>
+  </div>
+  <div>
+    <label tuiLabel label="Precio">
+      <div
+        class="tui-text_body-l-2 label-payment"
+        [class.tui-skeleton]="showLoader"
+      >
+        ${{ orderRequest?.total || 0 | tuiFormatNumber }}
+      </div>
+    </label>
+  </div>
+  <div class="tui-island__paragraph tui-island__paragraph_button">
+    <button tuiButton (click)="goToCreate()" appearance="secondary" *ngIf="orderRequest?.status === 'REJECTED'">
+      Comprar nuevamente
+    </button>
+    <button tuiButton (click)="retryPayment()"appearance="secondary" *ngIf="orderRequest?.status === 'CREATED'">
+      Reintentar pago
+    </button>
+  </div>
+</tui-island>

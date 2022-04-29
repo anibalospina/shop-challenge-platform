@@ -35,9 +35,9 @@ export class FormPaymentComponent implements OnInit {
   countryIsoCode = TuiCountryIsoCode.CO;
 
   public payForm = this.formBuilder.group({
-    customerName: ['', [Validators.required]],
-    customerEmail: ['', [Validators.required, Validators.email]],
-    customerMobile: ['', [Validators.required]],
+    customerName: ['Anibal Ospina', [Validators.required]],
+    customerEmail: ['anibalospinadev@gmail.com', [Validators.required, Validators.email]],
+    customerMobile: ['+573174455133', [Validators.required]],
     description: [
       'Curso Laravel + Angular + PlaceToPlay',
       [Validators.required],

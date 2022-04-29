@@ -1,0 +1,24 @@
+:host {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+tui-island {
+  width: 100%;
+  margin-top: 50px;
+}
+
+.form-title {
+  text-align: center;
+  height: 3em;
+}
+
+.label-payment {
+  height: 1em;
+}
+
+tui-island > div {
+  margin-top: 20px;
+}

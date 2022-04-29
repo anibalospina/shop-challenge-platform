@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { OrderRequest } from './models/order-request';
 import { PaymentRequest } from './models/payment-request';
 
 @Injectable({
@@ -26,5 +27,11 @@ export class PaymentService {
       total,
       currency,
     });
+  }
+
+  getRequestPayment(id: number): Observable<OrderRequest> {
+    return this.httpClient.get<OrderRequest>(
+      `${environment.api}/orders/payment-request/${id}`
+    );
   }
 }

@@ -4,11 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'pay',
+    redirectTo: 'payments',
     pathMatch: 'full'
   },
   {
-    path: 'pay',
+    path: 'payments',
     loadChildren: () => import('./payment/payment.module').then(m => m.PaymentModule)
   }
 ];

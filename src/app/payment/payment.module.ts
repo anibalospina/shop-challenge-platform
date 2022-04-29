@@ -11,12 +11,14 @@ import { TuiInputPhoneInternationalModule } from '@taiga-ui/kit';
 import { TuiLabelModule } from '@taiga-ui/core';
 import { TuiIslandModule } from '@taiga-ui/kit';
 import { TuiButtonModule } from '@taiga-ui/core';
-import { TuiInputInlineModule } from '@taiga-ui/kit';
 import { TuiCurrencyPipeModule } from '@taiga-ui/addon-commerce';
 import { TuiInputNumberModule } from '@taiga-ui/kit';
+import { PaymentComponent } from './payment/payment.component';
+import { TuiFormatNumberPipeModule } from '@taiga-ui/core';
+import { TuiNotificationModule } from '@taiga-ui/core';
 
 @NgModule({
-  declarations: [FormPaymentComponent],
+  declarations: [FormPaymentComponent, PaymentComponent],
   imports: [
     CommonModule,
     PaymentRoutingModule,
@@ -33,6 +35,8 @@ import { TuiInputNumberModule } from '@taiga-ui/kit';
     TuiCurrencyPipeModule,
     TuiInputNumberModule,
     TuiLoaderModule,
+    TuiFormatNumberPipeModule,
+    TuiNotificationModule,
   ],
 })
 export class PaymentModule {}
