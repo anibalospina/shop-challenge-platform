@@ -1,0 +1,29 @@
+tui-action {
+  background-color: white;
+  color: black;
+  margin-top: 20px;
+}
+
+tui-pagination {
+  margin-top: 20px;
+}
+
+svg {
+  background-color: white !important;
+}
+
+.icon-success {
+  color: var(--tui-positive);
+}
+
+.icon-pending {
+  color: var(--tui-warning-fill);
+}
+
+.icon-error {
+  color: var(--tui-error-fill);
+}
+
+tui-action > tui-marker-icon {
+  background-color: white !important;
+}

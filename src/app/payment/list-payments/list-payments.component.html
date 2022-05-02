@@ -1,0 +1,37 @@
+<tui-loader [overlay]="true" [showLoader]="showLoader">
+  <tui-action
+    [icon]="
+      item.status == 'CREATED'
+        ? 'tuiIconTimeLarge'
+        : item.status == 'REJECTED'
+        ? 'tuiIconCloseCircleLarge'
+        : 'tuiIconCheckCircleLarge'
+    "
+    *ngFor="let item of data"
+  >
+    {{ item.customer_name }}
+    (<a [href]="'mailto:' + item.customer_email">{{ item.customer_email }}</a
+    >)<br />
+    {{ item.customer_mobile }}<br />
+    <div
+      [ngClass]="{
+        'icon-pending': item.status == 'CREATED',
+        'icon-error': item.status == 'REJECTED',
+        'icon-success': !(item.status == 'CREATED' || item.status == 'REJECTED')
+      }"
+    >
+      {{
+        item.status == "CREATED"
+          ? "PAGO PENDIENTE"
+          : item.status == "REJECTED"
+          ? "PAGO RECHAZADO"
+          : "PAGO REALIZADO"
+      }}
+    </div>
+  </tui-action>
+  <tui-pagination
+    [length]="length"
+    [index]="index"
+    (indexChange)="goToPage($event)"
+  ></tui-pagination>
+</tui-loader>

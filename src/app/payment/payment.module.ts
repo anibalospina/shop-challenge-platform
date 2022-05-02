@@ -16,9 +16,12 @@ import { TuiInputNumberModule } from '@taiga-ui/kit';
 import { PaymentComponent } from './payment/payment.component';
 import { TuiFormatNumberPipeModule } from '@taiga-ui/core';
 import { TuiNotificationModule } from '@taiga-ui/core';
+import { ListPaymentsComponent } from './list-payments/list-payments.component';
+import { TuiActionModule } from '@taiga-ui/kit';
+import { TuiPaginationModule } from '@taiga-ui/kit';
 
 @NgModule({
-  declarations: [FormPaymentComponent, PaymentComponent],
+  declarations: [FormPaymentComponent, PaymentComponent, ListPaymentsComponent],
   imports: [
     CommonModule,
     PaymentRoutingModule,
@@ -37,6 +40,8 @@ import { TuiNotificationModule } from '@taiga-ui/core';
     TuiLoaderModule,
     TuiFormatNumberPipeModule,
     TuiNotificationModule,
+    TuiActionModule,
+    TuiPaginationModule,
   ],
 })
 export class PaymentModule {}

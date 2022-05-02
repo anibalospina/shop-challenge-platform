@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { DataPaginated } from './models/data-paginated';
+import { Order } from './models/order';
 import { OrderRequest } from './models/order-request';
 import { PaymentRequest } from './models/payment-request';
 
@@ -32,6 +34,13 @@ export class PaymentService {
   getRequestPayment(id: number): Observable<OrderRequest> {
     return this.httpClient.get<OrderRequest>(
       `${environment.api}/orders/payment-request/${id}`
+    );
+  }
+
+  getOrders(page: number = 1): Observable<DataPaginated<Order>> {
+    return this.httpClient.get<DataPaginated<Order>>(
+      `${environment.api}/orders`,
+      { params: { page } }
     );
   }
 }
